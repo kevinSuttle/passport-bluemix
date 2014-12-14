@@ -61,4 +61,4 @@ application:
 
 [The MIT License](http://opensource.org/licenses/MIT)
 
-Copyright (c) 2014 Minh Hoang [http://minhhoang.de/](http://blog.minhhoang.de/)
+Copyright (c) 2014 Minh Hoang [http://minhhoang.de/](http://minhhoang.de/)
