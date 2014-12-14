@@ -17,8 +17,8 @@
   ],
   "author": "minh.hoang <hieuminh.hoang@gmail.com> (http://blog.minhhoang.de/)",
   "repository":{
-    "type": "jazzhub",
-    "url": "https://hub.jazz.net/git/minhhoang/passport-bluemix"  
+    "type": "github",
+    "url": "https://github.com/m1nhhoang/passport-bluemix"  
   },
   "licenses": [
     {
