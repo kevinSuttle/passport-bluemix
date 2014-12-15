@@ -34,7 +34,14 @@
   "devDependencies": {
     "mocha": "*",
     "chai" : "*",
-    "chai-passport-strategy": "*"
+    "chai-passport-strategy": "*",
+    "express": "*",
+    "passport": "*",
+    "pkginfo":"*",
+    "connect-ensure-login": "*",
+    "cookie-parser": "*",
+    "express-session": "*",
+    "express-error-handler": "*"
     },
   "engines": {
     "node": ">= 0.4.0"

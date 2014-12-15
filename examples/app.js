@@ -1,10 +1,11 @@
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
   , path = require('path')
   , passport = require('passport')
-  , BlueMixOAuth2Strategy = require('passport-bluemix')
+  , cookieParser = require('cookie-parser')
+  , session = require('express-session')
+  , BlueMixOAuth2Strategy = require('../lib')
+  , errorHandler = require('express-error-handler')
   , ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
 var app = express();
@@ -12,17 +13,12 @@ var app = express();
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-app.use(express.favicon());
-app.use(express.logger('dev'));
-app.use(express.bodyParser());
-app.use(express.methodOverride());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.cookieParser());
-app.use(express.session({ secret: 'keyboard cat' }));
+app.use(cookieParser());
+app.use(session({ secret: 'keyboard cat',
+				  resave: false,
+				  saveUninitialized: true}));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(app.router);
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -34,7 +30,7 @@ passport.deserializeUser(function(obj, done) {
 
 // development only
 if ('development' == app.get('env')) {
-  app.use(express.errorHandler());
+  app.use(errorHandler());
 }
 
 app.get('/account',
@@ -42,6 +38,12 @@ app.get('/account',
 	  function(req, res) {
 	    res.send('Hello ' + req.user.username);
 	  });
+
+app.get('/',
+		  ensureLoggedIn('/login'),
+		  function(req, res) {
+		    res.send('Hello');
+		  });
 
 app.get('/login',
 	  function(req, res) {
